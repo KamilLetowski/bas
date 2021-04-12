@@ -3,10 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -20,20 +17,20 @@
     "target": "esnext",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "components/*"
-      ]
+      "@/components/*": ["components/*"],
+      "@/constants/*": ["constants/*"],
+      "@/plugins/*": ["plugins/*"],
+      "@/services/*": ["services/*"],
+      "@/styles": ["styles/index"],
+      "@/utils/*": ["utils/*"],
+      "@/providers/*": ["providers/*"],
+      "@/hooks/*": ["hooks/*"]
     },
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "isolatedModules": true
   },
-  "include": [
-    "src/**/*" // *** The files TypeScript should type check ***
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ] // *** The files to not type check ***
+  "exclude": ["node_modules", "build"], // *** The files to not type check ***
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

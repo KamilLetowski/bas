@@ -10,18 +10,28 @@ import {
   faStar,
   faCopyright,
   faHandPointRight,
+  faCalendarAlt,
 } from '@fortawesome/free-regular-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  fas,
+  faChevronRight,
+  faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
 
 const definitions = [
   fab,
   far,
+  fas,
   faBars,
   faStar,
   faCopyright,
   faLinkedinIn,
+  faChevronLeft,
+  faChevronRight,
   faFacebookSquare,
   faInstagram,
+  faCalendarAlt,
   faHandPointRight,
 ];
 

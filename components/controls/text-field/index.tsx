@@ -1,14 +1,26 @@
-import MUITextField from '@material-ui/core/TextField'
+import { TextFieldProps } from '@material-ui/core/TextField';
+import React from 'react';
+import { ControlProps } from '../types';
 
-type Props = {
-  label: string
-  className?: string
-}
+import * as Styled from './styles';
 
-const TextField: React.FC<Props> = ({ label, className }) => {
+export type Props = ControlProps & Partial<TextFieldProps>;
+
+const TextField = React.forwardRef(({
+  label,
+  className,
+  colorVariant = "dark",
+  ...rest
+}: Props, ref) => {
   return (
-    <MUITextField className={className} variant="outlined" label={label} />
+    <Styled.TextField
+      variant="outlined"
+      innerRef={ref}
+      label={label}
+      $colorVariant={colorVariant}
+      {...rest}
+    />
   );
-};
+});
 
 export default TextField;

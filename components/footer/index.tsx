@@ -1,10 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import * as Styled from './styles';
 
 const Footer = () => {
   return <Styled.Footer>
     <Styled.Content>
       <div>
-        <Styled.CompanyName icon={["far", "copyright"]} /><Styled.CompanyName>BAS GAMING</Styled.CompanyName>
+        <FontAwesomeIcon icon={["far", "copyright"]} /><Styled.CompanyName>BAS GAMING</Styled.CompanyName>
         All rights reserved
       </div>
       <Styled.Social>

@@ -26,6 +26,8 @@ export const Social = styled.div`
   align-items: center;
 `;
 
+export const ReservedIcon = styled(FontAwesomeIcon)``;
+
 const Icon = styled(FontAwesomeIcon)`
   margin-left: 20px;
   font-size: 24px;
@@ -34,12 +36,12 @@ const Icon = styled(FontAwesomeIcon)`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #333;
+    color: ${(props) => props.theme.palette.dark};
   }
 `;
 
 export const FingerRight = styled(Icon)`
-  color: #333;
+  color: ${(props) => props.theme.palette.dark};
   margin-right: 8px;
   font-size: 20px;
 `;

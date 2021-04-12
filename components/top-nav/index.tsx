@@ -1,28 +1,42 @@
-import Link from './link';
+import { useRouter } from 'next/router';
 
+import Link from './link';
 import Logo from '../shared/logo';
+import { useUserContext } from '@/providers/user';
+import Button from '../controls/button';
 
 import * as Styled from './styles';
 
-const links = [
-  { href: '/games', children: 'Gry' },
-  { href: '/account', children: 'Konto' },
-];
 
 const TopNav = () => {
+  const { state, logout } = useUserContext();
+  const router = useRouter();
+
+  const handleLogoClick = () => {
+    router.push('/');
+  };
+
   return (
     <Styled.Wrapper>
       <Styled.Header>
-        <Link href='/' activeClassName="" className="">
-          <Logo />
-        </Link>
+        <Logo onClick={handleLogoClick} />
         <Styled.Links>
-          {links.map(({ href, children }) => (
-            <Link key={href} href={href}>
-              {children}
+          <Link href="/games">
+            Gry
             </Link>
-          ))}
+          {state.userId === -1 && (
+            <Link href="/account">
+              Konto
+            </Link>)}
         </Styled.Links>
+        {state.userId !== -1 && (
+          <Styled.WelcomeUser>
+            <Styled.Text>
+              Witaj {state.userId}
+            </Styled.Text>
+            <Button onClick={logout}>wyloguj</Button>
+          </Styled.WelcomeUser>
+        )}
       </Styled.Header>
     </Styled.Wrapper>
   );

@@ -21,28 +21,28 @@ export const Wrapper = styled.div`
     left: 0;
     bottom: 0;
     opacity: 0.75;
-    background-color: #333;
+    background-color: ${(props) => props.theme.palette.dark};
     z-index: -1;
   }
 `;
 
 export const Title = styled.h1`
   margin: 72px 0 12px;
-  color: #ddd;
+  color: ${(props) => props.theme.palette.lightWhite};
   font-weight: 500;
   letter-spacing: 1px;
 `;
 
 export const SubTitle = styled.h3`
-  color: #ddd;
+  color: ${(props) => props.theme.palette.lightWhite};
   font-weight: 500;
   letter-spacing: 1px;
 `;
 
 export const Button = styled(MUIButton)`
   && {
-    color: #ddd;
-    border: 1px solid #ddd;
+    color: ${(props) => props.theme.palette.lightWhite};
+    border: 1px solid ${(props) => props.theme.palette.lightWhite};
     transition: all 0.3s ease;
     position: absolute;
     bottom: 25%;
@@ -50,8 +50,8 @@ export const Button = styled(MUIButton)`
     transform: translate(-50%, -100%);
 
     &:hover {
-      color: #fff;
-      border: 1px solid #fff;
+      color: ${(props) => props.theme.palette.white};
+      border: 1px solid ${(props) => props.theme.palette.white};
     }
   }
 `;

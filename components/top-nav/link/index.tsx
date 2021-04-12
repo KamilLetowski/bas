@@ -2,26 +2,22 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import NextLink from 'next/link'
 
+import * as Styled from './styles';
+
 type Props = {
   href: string;
-  activeClassName?: string;
-  className?: string;
-  as?: string
 }
 
-const Link: React.FC<Props> = ({ children, activeClassName = 'active', className = "link", ...props }) => {
+const Link: React.FC<Props> = ({ children, ...props }) => {
   const { asPath } = useRouter()
 
-  const classNameOutput =
-    asPath === props.href || asPath === props.as
-      ? `${className} ${activeClassName}`.trim()
-      : className
+  const isActive = asPath === props.href
 
   return (
     <NextLink {...props}>
-      <a className={classNameOutput}>
+      <Styled.Wrapper isActive={isActive}>
         {children}
-      </a>
+      </Styled.Wrapper>
     </NextLink>
   )
 }

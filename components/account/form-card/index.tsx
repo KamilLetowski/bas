@@ -13,13 +13,13 @@ const FormCard: React.FC<Props> = ({
   children,
 }) => {
   return (
-    <div>
+    <>
       <Styled.Title>{title}</Styled.Title>
       {children}
       <Styled.SwapLabel onClick={onSwapClick}>
         {swapLabel}
       </Styled.SwapLabel>
-    </div>
+    </>
   );
 };
 

@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const FormWrapper = styled.form`
+export const FormWrapper = styled.div`
   margin: 60px auto;
   width: 1200px;
   flex: 1;
@@ -48,5 +48,5 @@ export const FormContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 500px;
+  width: 350px;
 `;

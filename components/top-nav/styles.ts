@@ -21,3 +21,13 @@ export const Links = styled.div`
     margin-right: 24px;
   }
 `;
+
+export const WelcomeUser = styled.div`
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+`;
+
+export const Text = styled.span`
+  padding-right: 12px;
+`;

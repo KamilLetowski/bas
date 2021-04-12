@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const Title = styled.h2`
   font-weight: 500;
+  text-align: center;
 `;
 
 export const SwapLabel = styled.span`
-  color: #ddd !important;
+  color: ${(props) => props.theme.palette.lightWhite};
   text-align: center;
   padding-top: 8px;
   margin-top: 14px;

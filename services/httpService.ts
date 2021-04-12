@@ -1,17 +1,23 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 class HttpService {
-  private instance: AxiosInstance = null;
+  private instance: AxiosInstance;
 
   constructor() {
     this.instance = axios.create({
-      baseURL: '',
+      baseURL: 'https://hardbas.azurewebsites.net/',
     });
   }
 
-  get = (url: string, params?: unknown, config?: AxiosRequestConfig) => {
-    return this.instance.get(url, {
+  get = <T>(url: string, params?: unknown, config?: AxiosRequestConfig) => {
+    return this.instance.get<T>(url, {
       params,
+      ...config,
+    });
+  };
+
+  post = <T = {}>(url: string, body: unknown, config?: AxiosRequestConfig) => {
+    return this.instance.post<T>(url, body, {
       ...config,
     });
   };
