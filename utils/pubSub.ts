@@ -1,33 +1,33 @@
-type Callback = (data: unknown) => void;
+type Callback<T> = (data: T) => void;
 
 class PubSub {
-  private events: Record<string, Callback[]> = {};
+	private events: Record<string, Callback<any>[]> = {};
 
-  subscribe(eventName: string, callback: Callback) {
-    if (this.events[eventName]) {
-      this.events[eventName] = [];
-    }
-    this.events[eventName].push(callback);
-  }
+	subscribe<T>(eventName: string, callback: Callback<T>) {
+		if (!this.events[eventName]) {
+			this.events[eventName] = [];
+		}
+		this.events[eventName].push(callback);
+	}
 
-  unsubscribe(eventName: string, callback: Callback) {
-    if (this.events[eventName]) {
-      for (let i = 0; i < this.events[eventName].length; i++) {
-        if (this.events[eventName][i] === callback) {
-          this.events[eventName].splice(i, 1);
-          break;
-        }
-      }
-    }
-  }
+	unsubscribe(eventName: string, callback: Callback<unknown>) {
+		if (this.events[eventName]) {
+			for (let i = 0; i < this.events[eventName].length; i += 1) {
+				if (this.events[eventName][i] === callback) {
+					this.events[eventName].splice(i, 1);
+					break;
+				}
+			}
+		}
+	}
 
-  publish<T>(eventName: string, data: T) {
-    if (this.events[eventName]) {
-      this.events[eventName].forEach(function (callback) {
-        callback(data);
-      });
-    }
-  }
+	publish<T>(eventName: string, data: T) {
+		if (this.events[eventName]) {
+			this.events[eventName].forEach((callback) => {
+				callback(data);
+			});
+		}
+	}
 }
 
 const pubSub = new PubSub();

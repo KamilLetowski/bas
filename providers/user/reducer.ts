@@ -5,7 +5,7 @@ const reducer = (state: State, action: Action): State => {
 		case 'SET_USER_DATA':
 			return {
 				...state,
-				userId: action.payload.userId,
+				...action.payload,
 			};
 		default:
 			throw new Error(

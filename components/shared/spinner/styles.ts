@@ -4,11 +4,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { ColorVariant } from '@/plugins/theme';
 
 type Props = {
-  colorVariant: ColorVariant;
+	$colorVariant: ColorVariant;
 };
 
 export const Spinner = styled(CircularProgress)<Props>`
-  && {
-    color: ${(props) => props.theme.palette[props.colorVariant]};
-  }
+	&& {
+		color: ${(props) => props.theme.palette[props.$colorVariant]};
+	}
 `;

@@ -1,39 +1,49 @@
-import GamesList from '@/components/games'
+import { useEffect } from 'react';
+import { GetServerSideProps } from 'next';
+import Head from 'next/head';
+
+import GamesList from '@/components/games';
 import Search from '@/components/games/search';
-import Filters from '@/components/games/filters';
 import SearchWallpaper from '@/components/games/search-wallpaper';
-import gameService, { GameResponse } from "@/services/gameService";
+import gameService, { GameResponse } from '@/services/gameService';
+import httpService from '@/services/httpService';
 import { Flex } from '@/styles';
 import BasePanel from '@/components/admin/base-panel';
-import { useEffect } from 'react';
 import { useGameContext } from '@/providers/game';
 
-type Props = GameResponse;
+type Props = { data: GameResponse };
 
 const Games: React.FC<Props> = (props) => {
-  const { setGamesResponse, state } = useGameContext();
+	const { setGamesResponse, state } = useGameContext();
 
-  useEffect(() => {
-    setGamesResponse(props);
-  }, []);
+	useEffect(() => {
+		setGamesResponse(props.data);
+	}, [setGamesResponse, props]);
 
-  return <Flex maxHeight>
-    <BasePanel />
-    <SearchWallpaper>
-      <Search />
-    </SearchWallpaper>
-    <Filters />
-    <GamesList games={state.data} />
-  </Flex>
+	return (
+		<>
+			<Head>
+				<title>Gry</title>
+			</Head>
+			<Flex maxHeight>
+				<BasePanel />
+				<SearchWallpaper>
+					<Search />
+				</SearchWallpaper>
+				<GamesList games={state.data} />
+			</Flex>
+		</>
+	);
 };
 
-export async function getServerSideProps() {
-  // const { data } = await gameService.fetchAll();
-  return {
-    props: {
-      data: [],
-    },
-  }
-}
+export const getServerSideProps: GetServerSideProps = async (context) => {
+	httpService.addAuthTokenFromContext(context);
+	const { data } = await gameService.fetch();
+	return {
+		props: {
+			data,
+		},
+	};
+};
 
 export default Games;

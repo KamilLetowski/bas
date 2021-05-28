@@ -3,14 +3,12 @@ import TopNav from '../top-nav';
 
 import * as Styled from './styles';
 
-const Layout: React.FC = ({ children }) => {
-  return <Styled.Wrapper>
-    <TopNav />
-    <Styled.Content>
-      {children}
-    </Styled.Content>
-    <Footer />
-  </Styled.Wrapper>
-};
+const Layout: React.FC = ({ children }) => (
+	<Styled.Wrapper>
+		<TopNav />
+		<Styled.Content>{children}</Styled.Content>
+		<Footer />
+	</Styled.Wrapper>
+);
 
 export default Layout;

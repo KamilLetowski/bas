@@ -1,12 +1,12 @@
-import ContextBuilder from '../ContextBuilder';
+import { UserLogged } from '@/services/user-service';
+import { buildContext } from '../buildContext';
 import useState from './useState';
 
 export type Action = { type: 'SET_USER_DATA'; payload: State };
-export type State = { userId: number };
+export type State = UserLogged;
 
-const builder = new ContextBuilder(useState);
-builder.setContext();
-builder.setProvider();
-export const useUserContext = builder.createHook.bind(builder);
-const UserProvider = builder.provider;
+const { Provider, useStateContext } = buildContext(useState);
+export const useUserContext = useStateContext;
+
+const UserProvider = Provider;
 export default UserProvider;

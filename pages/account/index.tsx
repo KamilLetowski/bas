@@ -1,10 +1,17 @@
-import Box from "../../components/account/box"
-import { Flex } from "@/styles";
+import Head from 'next/head';
 
-const Account = () => {
-  return <Flex maxHeight>
-    <Box />
-  </Flex>
-};
+import { Flex } from '@/styles';
+import Box from '../../components/account/box';
+
+const Account = () => (
+	<>
+		<Head>
+			<title>Konto</title>
+		</Head>
+		<Flex maxHeight>
+			<Box />
+		</Flex>
+	</>
+);
 
 export default Account;

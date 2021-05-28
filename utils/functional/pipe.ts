@@ -1,7 +1,3 @@
 export function pipe(...fns: any[]) {
-  return (x?: any) => {
-    return fns.reduce((y, fn) => {
-      return fn(y);
-    }, x);
-  };
+	return (x?: any) => fns.reduce((y, fn) => fn(y), x);
 }

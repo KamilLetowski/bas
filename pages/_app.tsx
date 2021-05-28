@@ -1,40 +1,46 @@
-import { ThemeProvider } from 'styled-components';
+import type { AppProps } from 'next/app';
+import Router from 'next/router';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {
-  MuiPickersUtilsProvider,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { pl } from "date-fns/locale";
+import NProgress from 'nprogress';
+import { AnimatePresence } from 'framer-motion';
 
-import GameProvider from '@/providers/game';
-import UserProvider from '@/providers/user';
-import RequestStatusProvider from '@/providers/request-status';
+import AppProviders from '@/providers/AppProviders';
 
 import { GlobalStyle } from '../styles';
 import Layout from '../components/layout';
 
-import { theme } from '@/plugins/theme';
 import '@/plugins/fontAwesome';
 import '@/plugins/toastifyStyles.css';
 import 'normalize.css';
+import 'nprogress/nprogress.css';
 
-function MyApp({ Component, pageProps }) {
-  return <ThemeProvider theme={theme}>
-    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={pl}>
-      <RequestStatusProvider>
-        <GameProvider>
-          <UserProvider>
-            <Layout>
-              <GlobalStyle />
-              <ToastContainer />
-              <Component {...pageProps} />
-            </Layout>
-          </UserProvider>
-        </GameProvider>
-      </RequestStatusProvider>
-    </MuiPickersUtilsProvider>
-  </ThemeProvider>
+NProgress.configure({
+	showSpinner: false,
+});
+
+Router.events.on('routeChangeStart', () => {
+	NProgress.start();
+});
+Router.events.on('routeChangeComplete', () => {
+	NProgress.done();
+});
+Router.events.on('routeChangeError', () => {
+	NProgress.done();
+});
+
+function MyApp({ Component, pageProps }: AppProps) {
+	return (
+		<AppProviders>
+			<Layout>
+				<GlobalStyle />
+				<ToastContainer />
+				<AnimatePresence exitBeforeEnter>
+					<Component {...pageProps} />
+				</AnimatePresence>
+			</Layout>
+		</AppProviders>
+	);
 }
 
-export default MyApp
+export default MyApp;

@@ -1,38 +1,65 @@
 import { useRouter } from 'next/router';
-import { useCallback, useReducer } from 'react';
+import { useCallback, useEffect, useReducer } from 'react';
 
+import userService, { UserLogged } from '@/services/user-service';
+import cookieService from '@/services/cookieService';
+import httpService from '@/services/httpService';
+import { pipe } from '@/utils/functional';
 import reducer from './reducer';
-import { State } from './UserProvider';
+import { State } from '.';
 
 const useState = () => {
-  const [state, dispatch] = useReducer(reducer, { userId: -1 } as State);
-  const router = useRouter();
+	const [state, dispatch] = useReducer(reducer, {
+		userId: -1,
+		firstName: '',
+		lastName: '',
+		roles: [],
+		id: -1,
+	} as State);
+	const router = useRouter();
 
-  const setUserData = useCallback((data: { UserId: number }) => {
-    dispatch({
-      type: 'SET_USER_DATA',
-      payload: {
-        userId: data.UserId,
-      },
-    });
-  }, []);
+	const setUserData = useCallback((data: UserLogged) => {
+		dispatch({
+			type: 'SET_USER_DATA',
+			payload: data,
+		});
+	}, []);
 
-  const redirectAfterLogin = () => {
-    router.push('/games');
-  };
+	const redirectAfterLogin = useCallback(() => {
+		router.push('/games');
+	}, [router]);
 
-  const logout = () => {
-    setUserData({
-      UserId: -1,
-    });
-  };
+	const logout = useCallback(() => {
+		cookieService.removeAuthCookie();
+		httpService.removeAuthToken();
+		setUserData({
+			userId: -1,
+			firstName: '',
+			lastName: '',
+			roles: [],
+		});
+		router.push('/', undefined, {
+			shallow: true,
+		});
+	}, [setUserData, router]);
 
-  return {
-    state,
-    setUserData,
-    redirectAfterLogin,
-    logout,
-  };
+	useEffect(() => {
+		const authCookie = cookieService.getAuthCookie();
+		if (authCookie) {
+			pipe(
+				httpService.setAuthToken,
+				userService.parseJWTToken,
+				setUserData
+			)(authCookie);
+		}
+	}, [setUserData]);
+
+	return {
+		state,
+		setUserData,
+		redirectAfterLogin,
+		logout,
+	};
 };
 
 export default useState;

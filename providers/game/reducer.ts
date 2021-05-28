@@ -1,3 +1,4 @@
+import { Game, Rate } from '@/services/gameService';
 import { Action, State } from '.';
 
 const reducer = (state: State, action: Action): State => {
@@ -8,10 +9,35 @@ const reducer = (state: State, action: Action): State => {
 				...action.payload,
 			};
 		}
+		case 'SET_CATEGORIES': {
+			return {
+				...state,
+				categories: action.payload,
+			};
+		}
+		case 'SET_FILTERS': {
+			return {
+				...state,
+				filters: action.payload,
+			};
+		}
+		case 'SET_GAME': {
+			return {
+				...state,
+				game: action.payload,
+			};
+		}
+		case 'SET_RATE': {
+			return {
+				...state,
+				game: {
+					...(state.game as Game),
+					rates: [...(state.game?.rates as Rate[]), action.payload],
+				},
+			};
+		}
 		default:
-			throw new Error(
-				`Unhandled action type (${action.type}) in reducer: Game`
-			);
+			throw new Error(`Unhandled action type in reducer: Game`);
 	}
 };
 
