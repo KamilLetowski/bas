@@ -43,7 +43,10 @@ export interface Filters {
 
 class GameService {
 	fetch = (filters: Filters = {}) =>
-		httpService.get<GameResponse>('/api/games/search', filters);
+		httpService.get<GameResponse>('/api/games/search', {
+			...filters,
+			size: 99,
+		});
 
 	fetchById = (id: number) => httpService.get(`api/games`, { id });
 
@@ -57,6 +60,8 @@ class GameService {
 
 	addRate = (gameId: number, rate: Rate) =>
 		httpService.post(`/api/games/${gameId}/rate`, rate);
+
+	fetchSuggestions = () => httpService.get<Game>('/api/games/suggestions');
 }
 
 export default new GameService();

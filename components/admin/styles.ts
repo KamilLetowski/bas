@@ -60,8 +60,10 @@ export const ButtonGroup = styled.div`
 `;
 
 export const Content = styled.div<Props>`
-	overflow: hidden;
+	overflow: auto;
 	transition: opacity 0.3s ease;
 	transition-delay: ${(props) => (props.isExpanded ? '0.3s' : '0s')};
 	opacity: ${(props) => (props.isExpanded ? '1' : '0')};
+	max-height: 100%;
+	margin-right: -16px;
 `;

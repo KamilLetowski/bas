@@ -4,7 +4,10 @@ import { FieldValues, useForm } from 'react-hook-form';
 import TextField from '@/components/form-controls/text-field';
 import DatePicker from '@/components/form-controls/date-picker';
 import Yup from '@/plugins/yup';
-import { fieldIsRequired } from 'constants/formValidationMessages';
+import {
+	fieldIsRequired,
+	invalidFieldFormat,
+} from 'constants/formValidationMessages';
 import gameService, { Game } from '@/services/gameService';
 import SpinnerControl from '@/components/shared/spinner-control';
 import useLoading from '@/hooks/useLoading';
@@ -17,7 +20,10 @@ import * as Styled from './styles';
 const validationSchema = Yup.object().shape({
 	title: Yup.string().required(fieldIsRequired('tytuł')),
 	description: Yup.string().required(fieldIsRequired('opis')),
-	releaseDate: Yup.date().nullable().required(fieldIsRequired('data wydania')),
+	releaseDate: Yup.date()
+		.nullable()
+		.required(fieldIsRequired('data wydania'))
+		.typeError(invalidFieldFormat()),
 	url: Yup.string().required(fieldIsRequired('link do zdjęcia')),
 	category: Yup.object().shape({
 		name: Yup.string().required(fieldIsRequired('kategoria')),

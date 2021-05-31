@@ -21,7 +21,7 @@ class PubSub {
 		}
 	}
 
-	publish<T>(eventName: string, data: T) {
+	publish<T>(eventName: string, data?: T) {
 		if (this.events[eventName]) {
 			this.events[eventName].forEach((callback) => {
 				callback(data);

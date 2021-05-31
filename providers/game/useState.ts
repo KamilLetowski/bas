@@ -19,6 +19,7 @@ const useState = () => {
 		pageIndex: 0,
 		categories: [],
 		filters: {},
+		suggestions: [],
 	} as State);
 
 	const setGamesResponse = useCallback((response: GameResponse) => {
@@ -80,6 +81,18 @@ const useState = () => {
 		[setPending, setResolved]
 	);
 
+	const fetchSuggestions = useCallback(async () => {
+		try {
+			setPending('fetchSuggestions');
+			const { data } = await gameService.fetchSuggestions();
+			dispatch({
+				type: 'SET_SUGGESTIONS',
+				payload: data as any,
+			});
+			setResolved('fetchSuggestions');
+		} catch (error) {}
+	}, [setPending, setResolved]);
+
 	useEffect(() => {
 		initFetchCategories();
 	}, [initFetchCategories]);
@@ -92,6 +105,7 @@ const useState = () => {
 		initFetchCategories,
 		setFilters,
 		setGame,
+		fetchSuggestions,
 	};
 };
 

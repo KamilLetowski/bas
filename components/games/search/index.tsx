@@ -7,11 +7,13 @@ import SelectField from '@/components/form-controls/select-field';
 import { useGameContext } from '@/providers/game';
 
 import { Category } from '@/services/gameService';
+import pubSub from '@/utils/pubSub';
+
 import * as Styled from './styles';
 
 type FormValues = {
 	category: Category;
-	tite: string;
+	title: string;
 	description: string;
 };
 
@@ -31,6 +33,7 @@ const Search = () => {
 		};
 		setFilters(payload);
 		fetchGames(payload);
+		pubSub.publish('searchClick');
 	};
 
 	return (

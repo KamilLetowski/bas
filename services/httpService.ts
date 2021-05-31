@@ -43,7 +43,6 @@ class HttpService {
 	};
 
 	addAuthTokenFromContext = (context: GetServerSidePropsContext) => {
-		console.log(context.req.headers);
 		if (context.req) {
 			const authCookie = context.req.headers.cookie?.split(
 				'Authorization='

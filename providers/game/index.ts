@@ -25,11 +25,16 @@ export type Action =
 	| {
 			type: 'SET_RATE';
 			payload: Rate;
+	  }
+	| {
+			type: 'SET_SUGGESTIONS';
+			payload: Game[];
 	  };
 export type State = {
 	categories: Category[];
 	filters: Filters;
 	game?: Game;
+	suggestions: Game[];
 } & GameResponse;
 
 const { Provider, useStateContext } = buildContext(useState);

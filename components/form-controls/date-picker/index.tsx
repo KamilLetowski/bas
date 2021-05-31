@@ -28,6 +28,7 @@ const DatePicker = ({ control, name, label, ...restProps }: Props) => {
 				{...restField}
 				innerRef={ref}
 				disableToolbar
+				minDateMessage=""
 				variant="inline"
 				invalidDateMessage=""
 				format="dd/MM/yyyy"
