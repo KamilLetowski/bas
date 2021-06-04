@@ -42,6 +42,12 @@ const reducer = (state: State, action: Action): State => {
 				suggestions: action.payload,
 			};
 		}
+		case 'SET_USER_MARKS': {
+			return {
+				...state,
+				userMarks: action.payload,
+			};
+		}
 		default:
 			throw new Error(`Unhandled action type in reducer: Game`);
 	}

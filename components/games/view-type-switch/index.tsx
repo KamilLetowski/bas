@@ -2,7 +2,7 @@ import React from 'react';
 
 import * as Styled from './styles';
 
-export type GameViewType = 'base' | 'suggestion';
+export type GameViewType = 'base' | 'suggestion' | 'myMarks';
 
 type Props = {
 	viewType: GameViewType;
@@ -23,7 +23,7 @@ const ViewTypeSwitch: React.FC<Props> = ({ viewType, onChange }) => {
 				onClick={handleChange}
 				isActive={viewType === 'base'}
 			>
-				Wysztkie gry
+				Wszystkie gry
 			</Styled.ViewTypeSwitch>
 			<Styled.ViewTypeSwitch
 				data-type="suggestion"
@@ -31,6 +31,13 @@ const ViewTypeSwitch: React.FC<Props> = ({ viewType, onChange }) => {
 				isActive={viewType === 'suggestion'}
 			>
 				Propozycje gier
+			</Styled.ViewTypeSwitch>
+			<Styled.ViewTypeSwitch
+				data-type="myMarks"
+				onClick={handleChange}
+				isActive={viewType === 'myMarks'}
+			>
+				Moje oceny
 			</Styled.ViewTypeSwitch>
 		</Styled.Wrapper>
 	);

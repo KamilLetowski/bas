@@ -62,6 +62,8 @@ class GameService {
 		httpService.post(`/api/games/${gameId}/rate`, rate);
 
 	fetchSuggestions = () => httpService.get<Game>('/api/games/suggestions');
+
+	fetchUserMarks = () => httpService.get<Game>('/api/games/user');
 }
 
 export default new GameService();

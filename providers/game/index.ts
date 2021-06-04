@@ -29,12 +29,17 @@ export type Action =
 	| {
 			type: 'SET_SUGGESTIONS';
 			payload: Game[];
+	  }
+	| {
+			type: 'SET_USER_MARKS';
+			payload: Game[];
 	  };
 export type State = {
 	categories: Category[];
 	filters: Filters;
 	game?: Game;
 	suggestions: Game[];
+	userMarks: Game[];
 } & GameResponse;
 
 const { Provider, useStateContext } = buildContext(useState);

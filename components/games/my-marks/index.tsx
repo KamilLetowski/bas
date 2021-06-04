@@ -6,18 +6,18 @@ import { useRequestStatusContext } from '@/providers/request-status';
 import { useGameContext } from '@/providers/game';
 import Game from '../game';
 
-const Suggestions = () => {
+const MyMarks = () => {
 	const { state } = useRequestStatusContext();
-	const { state: gameState, fetchSuggestions } = useGameContext();
+	const { state: gameState, fetchUserMarks } = useGameContext();
 
 	useEffect(() => {
-		fetchSuggestions();
-	}, [fetchSuggestions]);
+		fetchUserMarks();
+	}, [fetchUserMarks]);
 
 	return (
-		<SpinnerControl isLoading={state.fetchSuggestions === 'PENDING'}>
+		<SpinnerControl isLoading={state.fetchUserMarks === 'PENDING'}>
 			<Grid container spacing={3}>
-				{gameState.suggestions.map((game) => (
+				{gameState.userMarks.map((game) => (
 					<Grid item md={6} key={game.title}>
 						<Game {...game} />
 					</Grid>
@@ -27,4 +27,4 @@ const Suggestions = () => {
 	);
 };
 
-export default Suggestions;
+export default MyMarks;

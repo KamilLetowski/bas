@@ -20,6 +20,7 @@ const useState = () => {
 		categories: [],
 		filters: {},
 		suggestions: [],
+		userMarks: [],
 	} as State);
 
 	const setGamesResponse = useCallback((response: GameResponse) => {
@@ -82,15 +83,23 @@ const useState = () => {
 	);
 
 	const fetchSuggestions = useCallback(async () => {
-		try {
-			setPending('fetchSuggestions');
-			const { data } = await gameService.fetchSuggestions();
-			dispatch({
-				type: 'SET_SUGGESTIONS',
-				payload: data as any,
-			});
-			setResolved('fetchSuggestions');
-		} catch (error) {}
+		setPending('fetchSuggestions');
+		const { data } = await gameService.fetchSuggestions();
+		dispatch({
+			type: 'SET_SUGGESTIONS',
+			payload: data as any,
+		});
+		setResolved('fetchSuggestions');
+	}, [setPending, setResolved]);
+
+	const fetchUserMarks = useCallback(async () => {
+		setPending('fetchUserMarks');
+		const { data } = await gameService.fetchUserMarks();
+		dispatch({
+			type: 'SET_USER_MARKS',
+			payload: data as any,
+		});
+		setResolved('fetchUserMarks');
 	}, [setPending, setResolved]);
 
 	useEffect(() => {
@@ -106,6 +115,7 @@ const useState = () => {
 		setFilters,
 		setGame,
 		fetchSuggestions,
+		fetchUserMarks,
 	};
 };
 

@@ -15,6 +15,7 @@ export type State = {
 	updateUserRole: RequestStatus;
 	addNewRate: RequestStatus;
 	fetchSuggestions: RequestStatus;
+	fetchUserMarks: RequestStatus;
 };
 
 const { Provider, useStateContext } = buildContext(useState);

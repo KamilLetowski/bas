@@ -10,6 +10,7 @@ import Game from './game';
 import SpinnerControl from '../shared/spinner-control';
 import ViewTypeSwitch, { GameViewType } from './view-type-switch';
 import Suggestions from './suggestions';
+import MyMarks from './my-marks';
 
 type Props = {
 	games: GameType[];
@@ -44,7 +45,7 @@ const Games: React.FC<Props> = ({ games }) => {
 						onChange={handleViewTypeChange}
 					/>
 				)}
-				{gameViewType === 'base' ? (
+				{gameViewType === 'base' && (
 					<SpinnerControl isLoading={state.fetchGames === 'PENDING'}>
 						<Grid container spacing={3}>
 							{games.map((game) => (
@@ -54,9 +55,9 @@ const Games: React.FC<Props> = ({ games }) => {
 							))}
 						</Grid>
 					</SpinnerControl>
-				) : (
-					<Suggestions />
 				)}
+				{gameViewType === 'suggestion' && <Suggestions />}
+				{gameViewType === 'myMarks' && <MyMarks />}
 			</Flex>
 		</ResponsiveContainer>
 	);
