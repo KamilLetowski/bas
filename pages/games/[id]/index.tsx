@@ -34,7 +34,8 @@ const Game: React.FC<Props> = ({ data }) => {
 						<GameRoute {...state.game} />
 						{state.game.rates.findIndex(
 							(rate) => rate.user === userState.firstName
-						) === -1 && <NewRate gameId={state.game.id} />}
+						) === -1 &&
+							userState.userId !== -1 && <NewRate gameId={state.game.id} />}
 						<Rates items={state.game.rates} />
 					</Flex>
 				)}
